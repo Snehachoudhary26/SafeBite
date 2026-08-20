@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, AlertTriangle, Send, Copy, Check, ShieldAlert } from 'lucide-react';
+import { X, AlertTriangle, Send, Copy, Check, Shield } from 'lucide-react';
 
 export default function GrievanceModal({ isOpen, onClose, prefilledCase }) {
   const [copied, setCopied] = useState(false);
@@ -12,25 +12,19 @@ export default function GrievanceModal({ isOpen, onClose, prefilledCase }) {
   if (!isOpen) return null;
 
   const sampleNoticeText = `FORM OF FORMAL STATUTORY COMPLAINT
-UNDER THE FOOD SAFETY AND STANDARDS ACT, 2006 (SECTIONS 38, 50, 59)
+UNDER FOOD SAFETY AND STANDARDS ACT, 2006 (SECTIONS 38, 50, 59)
 
-TO: Designated Officer / Food Safety Officer (FSO)
-National Consumer Helpline & FSSAI Food Safety Connect Portal
-
-SUBJECT: Evidence Dossier for Food Adulteration & Hazardous Practice
+TO: Designated Food Safety Officer (FSO) & FSSAI Portal
 TARGET VENDOR: ${vendorName || 'Gupta Fast Food & Rolls'}
 LOCATION: ${location || 'Connaught Place, New Delhi'}
 VIOLATION: ${violationType === 'REUSED_OIL' ? 'Carcinogenic Reused Frying Oil (TPC > 25%)' : 'Banned Industrial Chemical Dye (Rhodamine B)'}
 
-EVIDENCE PARTICULARS:
-- AI Multi-Agent Risk Index: 94% (Critical Hazard Flag)
-- Computer Vision Saliency Match: 96.4% confidence (Rhodamine-B spectral resonance)
-- RUCO Compliance: FAILED (Missing periodic oil disposal log)
+EVIDENCE AUDIT:
+- Multi-Agent AI Risk Score: 94% (Critical Hazard Flag)
+- Computer Vision Saliency Match: 96.4% confidence (Rhodamine-B spectral signature)
+- RUCO Compliance: FAILED (No oil disposal logs)
 
-REQUESTED ACTION:
-Immediate inspection and seizure of food samples under Section 38 of FSS Act 2006 for certified NABL accredited laboratory analysis.
-
-DISPATCHED VIA SAFEBITE PUBLIC ACCOUNTABILITY PLATFORM`;
+REQUESTED ACTION: Immediate Inspection & Sample Seizure under Section 38 of FSS Act 2006.`;
 
   const handleCopy = () => {
     navigator.clipboard.writeText(sampleNoticeText);
@@ -46,10 +40,9 @@ DISPATCHED VIA SAFEBITE PUBLIC ACCOUNTABILITY PLATFORM`;
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slateDark-950/80 backdrop-blur-md animate-in fade-in duration-200">
       <div className="cap-panel w-full max-w-2xl rounded-2xl border border-slate-700 shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
-        {/* Modal Header */}
         <div className="p-4 sm:p-5 border-b border-slate-800 flex items-center justify-between bg-slateDark-900">
           <div className="flex items-center gap-2">
-            <ShieldAlert className="w-5 h-5 text-amberGold-400" />
+            <Shield className="w-5 h-5 text-amberGold-400" />
             <h3 className="font-extrabold text-white text-base">FSSAI Statutory Grievance Generator</h3>
           </div>
           <button
@@ -60,7 +53,6 @@ DISPATCHED VIA SAFEBITE PUBLIC ACCOUNTABILITY PLATFORM`;
           </button>
         </div>
 
-        {/* Modal Body */}
         <div className="p-4 sm:p-6 overflow-y-auto space-y-4 text-xs">
           {isSubmitted ? (
             <div className="text-center py-8 space-y-3">
@@ -109,7 +101,7 @@ DISPATCHED VIA SAFEBITE PUBLIC ACCOUNTABILITY PLATFORM`;
               </div>
 
               <div>
-                <label className="text-slate-400 font-semibold block mb-1">Suspected Violation Type</label>
+                <label className="text-slate-400 font-semibold block mb-1">Suspected Violation</label>
                 <select
                   value={violationType}
                   onChange={(e) => setViolationType(e.target.value)}
@@ -123,7 +115,7 @@ DISPATCHED VIA SAFEBITE PUBLIC ACCOUNTABILITY PLATFORM`;
               </div>
 
               <div>
-                <label className="text-slate-400 font-semibold block mb-1">Description & Evidence Details</label>
+                <label className="text-slate-400 font-semibold block mb-1">Description</label>
                 <textarea
                   rows="3"
                   value={description}
@@ -133,7 +125,6 @@ DISPATCHED VIA SAFEBITE PUBLIC ACCOUNTABILITY PLATFORM`;
                 ></textarea>
               </div>
 
-              {/* Pre-formatted Notice Preview */}
               <div>
                 <label className="text-slate-400 font-semibold block mb-1">Pre-formatted Legal Notice Preview</label>
                 <pre className="p-3 rounded-xl bg-slateDark-950 border border-slate-800 text-[10px] font-mono text-slate-300 overflow-x-auto whitespace-pre-wrap">
