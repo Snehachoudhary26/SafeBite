@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ThemeProvider } from './components/ThemeContext';
 import Navbar from './components/Navbar';
-import HeroMasterpiece from './components/HeroMasterpiece';
+import HeroReferenceMaster from './components/HeroReferenceMaster';
 import StatsBanner from './components/StatsBanner';
 import SolutionsSection from './components/SolutionsSection';
 import AgentConsole from './components/AgentConsole';
@@ -39,9 +39,9 @@ export default function App() {
 
   return (
     <ThemeProvider>
-      <div className="min-h-screen flex flex-col master-light-bg dark:master-dark-bg text-slate-900 dark:text-white transition-colors duration-200">
+      <div className="min-h-screen flex flex-col bg-reference-light dark:bg-reference-dark text-slate-900 dark:text-white transition-colors duration-200">
         
-        {/* Exact Masterpiece Header matching Image 1 */}
+        {/* Navbar matching Image 1 */}
         <Navbar
           activeTab={activeTab}
           setActiveTab={setActiveTab}
@@ -51,17 +51,17 @@ export default function App() {
           onLogout={handleLogout}
         />
 
-        {/* Masterpiece Home Hero & Floating Stats matching Image 1 */}
+        {/* Masterpiece Home Page matching Image 1 */}
         {activeTab === 'home' && (
           <>
-            <HeroMasterpiece setActiveTab={setActiveTab} />
+            <HeroReferenceMaster setActiveTab={setActiveTab} />
             <StatsBanner />
             <SolutionsSection setActiveTab={setActiveTab} />
           </>
         )}
 
         {/* Interactive Sub-Modules */}
-        <main className="flex-1 max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full">
+        <main className="flex-1 max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full">
           {activeTab === 'vision' && (
             <VisionToxinStudio />
           )}

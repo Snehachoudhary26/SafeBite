@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useTheme } from './ThemeContext';
-import { ShieldCheck, Sun, Moon, Menu, X, AlertTriangle, Sparkles, User, LogOut } from 'lucide-react';
+import { ShieldCheck, Sun, Moon, Menu, X, AlertTriangle, User, LogOut } from 'lucide-react';
 
 export default function Navbar({ activeTab, setActiveTab, onOpenGrievance, onOpenAuth, user, onLogout }) {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -17,11 +17,11 @@ export default function Navbar({ activeTab, setActiveTab, onOpenGrievance, onOpe
   ];
 
   return (
-    <nav className="sticky top-0 z-50 bg-[#060d1d]/90 dark:bg-[#060d1d]/90 bg-white/95 border-b border-slate-200 dark:border-slate-800/80 backdrop-blur-md transition-colors">
-      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
+    <nav className="sticky top-0 z-50 bg-[#070f1e]/90 dark:bg-[#070f1e]/90 bg-white/95 border-b border-slate-200 dark:border-slate-800 backdrop-blur-md transition-colors">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           
-          {/* Brand Logo Matching Image 1 */}
+          {/* Logo Matching Image 1 */}
           <div className="flex items-center gap-3 cursor-pointer" onClick={() => setActiveTab('home')}>
             <div className="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center text-white shadow-lg shadow-blue-500/25">
               <ShieldCheck className="w-6 h-6" />
@@ -33,12 +33,12 @@ export default function Navbar({ activeTab, setActiveTab, onOpenGrievance, onOpe
                   AI Lab
                 </span>
               </div>
-              <p className="text-[11px] text-slate-500 dark:text-slate-400 font-medium">Food Safety & Public Accountability Hub</p>
+              <p className="text-[10px] text-slate-500 dark:text-slate-400 font-medium">Food Safety & Public Accountability Hub</p>
             </div>
           </div>
 
           {/* Nav Items Matching Image 1 */}
-          <div className="hidden xl:flex items-center gap-1">
+          <div className="hidden xl:flex items-center gap-1.5">
             {navItems.map((item) => {
               const isActive = activeTab === item.id;
               return (
@@ -57,22 +57,22 @@ export default function Navbar({ activeTab, setActiveTab, onOpenGrievance, onOpe
             })}
           </div>
 
-          {/* Right Action Utilities Matching Image 1 */}
+          {/* Right Action Buttons Matching Image 1 */}
           <div className="flex items-center gap-3">
-            {/* Theme Switcher Button */}
+            {/* Theme Toggle Sun/Moon */}
             <button
               onClick={toggleTheme}
               className="p-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-100 dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-800 transition-all"
-              title="Toggle Light/Dark Theme"
+              title="Toggle Light/Dark Mode"
             >
               {isDark ? <Sun className="w-4 h-4 text-amber-400" /> : <Moon className="w-4 h-4 text-slate-700" />}
             </button>
 
             {user ? (
-              <div className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-xs">
+              <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-xs">
                 <User className="w-4 h-4 text-blue-500" />
                 <span className="font-bold text-slate-800 dark:text-slate-200">{user.name}</span>
-                <button onClick={onLogout} title="Sign Out" className="text-slate-400 hover:text-rose-500 ml-1">
+                <button onClick={onLogout} className="text-slate-400 hover:text-rose-500 ml-1">
                   <LogOut className="w-3.5 h-3.5" />
                 </button>
               </div>
@@ -106,7 +106,7 @@ export default function Navbar({ activeTab, setActiveTab, onOpenGrievance, onOpe
 
       {/* Mobile Drawer */}
       {mobileOpen && (
-        <div className="xl:hidden border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-[#060d1d] px-4 py-4 space-y-1.5 shadow-2xl">
+        <div className="xl:hidden border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-[#070f1e] px-4 py-4 space-y-1.5 shadow-2xl">
           {navItems.map((item) => (
             <button
               key={item.id}

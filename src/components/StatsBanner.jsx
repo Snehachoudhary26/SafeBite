@@ -1,5 +1,5 @@
 import React from 'react';
-import { ShieldCheck, AlertTriangle, Users, TrendingUp } from 'lucide-react';
+import { ShieldCheck, AlertTriangle, Users, TrendingUp, ChevronDown } from 'lucide-react';
 
 export default function StatsBanner() {
   const stats = [
@@ -34,7 +34,7 @@ export default function StatsBanner() {
   ];
 
   return (
-    <div className="relative z-20 max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 -mt-8 sm:-mt-12">
+    <div className="relative z-20 max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 -mt-10 sm:-mt-14">
       <div className="rounded-3xl p-6 sm:p-8 bg-white dark:bg-[#0a1426] border border-slate-200 dark:border-slate-800 shadow-2xl">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 divide-y sm:divide-y-0 sm:divide-x divide-slate-200 dark:divide-slate-800/80">
           {stats.map((item, idx) => {
@@ -45,16 +45,23 @@ export default function StatsBanner() {
                   <Icon className={`w-6 h-6 sm:w-7 sm:h-7 ${item.iconColor}`} />
                 </div>
                 <div>
-                  <div className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white tracking-tight">
+                  <div className="text-2xl sm:text-3xl font-black text-slate-950 dark:text-white tracking-tight">
                     {item.value}
                   </div>
-                  <div className="text-xs text-slate-600 dark:text-slate-300 font-medium mt-0.5">
+                  <div className="text-xs text-slate-700 dark:text-slate-300 font-medium mt-0.5">
                     {item.label}
                   </div>
                 </div>
               </div>
             );
           })}
+        </div>
+
+        {/* Scroll to Explore cue matching Image 1 */}
+        <div className="pt-4 text-center">
+          <span className="text-[11px] text-slate-500 dark:text-slate-400 font-medium inline-flex items-center gap-1">
+            Scroll to explore <ChevronDown className="w-3.5 h-3.5 animate-bounce" />
+          </span>
         </div>
       </div>
     </div>
