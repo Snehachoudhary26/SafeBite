@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { ThemeProvider } from './components/ThemeContext';
 import Navbar from './components/Navbar';
-import SplitHeroBanner from './components/SplitHeroBanner';
-import InteractiveFoodScanner from './components/InteractiveFoodScanner';
-import HighlightsGrid from './components/HighlightsGrid';
+import HeroExact from './components/HeroExact';
+import StatsBanner from './components/StatsBanner';
+import SolutionsSection from './components/SolutionsSection';
 import AgentConsole from './components/AgentConsole';
 import StreamingPipeline from './components/StreamingPipeline';
 import VisionToxinStudio from './components/VisionToxinStudio';
@@ -15,65 +15,43 @@ import AuthModal from './components/AuthModal';
 import Footer from './components/Footer';
 
 export default function App() {
-  const [activeTab, setActiveTab] = useState('agents');
+  const [activeTab, setActiveTab] = useState('home');
   const [isGrievanceOpen, setIsGrievanceOpen] = useState(false);
   const [isAuthOpen, setIsAuthOpen] = useState(false);
-  const [selectedCaseForNotice, setSelectedCaseForNotice] = useState(null);
-  const [currentUser, setCurrentUser] = useState(null);
-
-  useEffect(() => {
-    const savedUser = localStorage.getItem('safebite_user');
-    if (savedUser) {
-      try {
-        setCurrentUser(JSON.parse(savedUser));
-      } catch (e) {
-        console.error(e);
-      }
-    }
-  }, []);
-
-  const handleOpenGrievance = (caseData = null) => {
-    setSelectedCaseForNotice(caseData);
-    setIsGrievanceOpen(true);
-  };
-
-  const handleLogout = () => {
-    localStorage.removeItem('safebite_user');
-    localStorage.removeItem('safebite_token');
-    setCurrentUser(null);
-  };
 
   return (
     <ThemeProvider>
-      <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors duration-200">
+      <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-darkBg-950 text-slate-900 dark:text-slate-100 transition-colors">
+        
+        {/* Navbar Matching Reference */}
         <Navbar
           activeTab={activeTab}
           setActiveTab={setActiveTab}
-          onOpenGrievance={() => handleOpenGrievance(null)}
-          user={currentUser}
+          onOpenGrievance={() => setIsGrievanceOpen(true)}
           onOpenAuth={() => setIsAuthOpen(true)}
-          onLogout={handleLogout}
         />
 
-        {/* Real Food AI Hero Banner */}
-        <SplitHeroBanner
-          setActiveTab={setActiveTab}
-        />
+        {/* Home Page Content */}
+        {activeTab === 'home' && (
+          <>
+            <HeroExact setActiveTab={setActiveTab} />
+            <StatsBanner />
+            <SolutionsSection setActiveTab={setActiveTab} />
+          </>
+        )}
 
-        {/* Interactive Street Food AI Scanner (Samosas, Momos, Reused Oil) */}
-        <InteractiveFoodScanner />
-
-        <main className="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16 w-full">
-          {activeTab === 'agents' && (
-            <AgentConsole onGenerateNotice={handleOpenGrievance} />
+        {/* Interactive Sub-Modules */}
+        <main className="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
+          {activeTab === 'vision' && (
+            <VisionToxinStudio />
           )}
 
           {activeTab === 'streaming' && (
             <StreamingPipeline />
           )}
 
-          {activeTab === 'vision' && (
-            <VisionToxinStudio />
+          {activeTab === 'agents' && (
+            <AgentConsole onGenerateNotice={() => setIsGrievanceOpen(true)} />
           )}
 
           {activeTab === 'xai' && (
@@ -85,25 +63,26 @@ export default function App() {
           )}
 
           {activeTab === 'directory' && (
-            <VendorDirectory onOpenGrievance={() => handleOpenGrievance(null)} />
+            <VendorDirectory onOpenGrievance={() => setIsGrievanceOpen(true)} />
           )}
         </main>
 
-        <HighlightsGrid setActiveTab={setActiveTab} />
-
+        {/* Footer */}
         <Footer setActiveTab={setActiveTab} />
 
+        {/* Grievance Modal */}
         <GrievanceModal
           isOpen={isGrievanceOpen}
           onClose={() => setIsGrievanceOpen(false)}
-          prefilledCase={selectedCaseForNotice}
         />
 
+        {/* Auth Modal */}
         <AuthModal
           isOpen={isAuthOpen}
           onClose={() => setIsAuthOpen(false)}
-          onAuthSuccess={(user) => setCurrentUser(user)}
+          onAuthSuccess={() => setIsAuthOpen(false)}
         />
+
       </div>
     </ThemeProvider>
   );
