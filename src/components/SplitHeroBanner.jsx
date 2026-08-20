@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { heroSlides } from '../data/heroSlidesData';
-import { ChevronLeft, ChevronRight, ArrowRight, Activity, Sparkles, Shield, CheckCircle } from 'lucide-react';
+import { ChevronLeft, ChevronRight, ArrowRight, Activity, Sparkles, AlertTriangle } from 'lucide-react';
 
 export default function SplitHeroBanner({ setActiveTab }) {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -8,7 +8,6 @@ export default function SplitHeroBanner({ setActiveTab }) {
 
   const currentSlide = heroSlides[currentIndex];
 
-  // Auto-advance banner animation every 5.5 seconds smoothly
   useEffect(() => {
     if (isPaused) return;
     const interval = setInterval(() => {
@@ -25,13 +24,13 @@ export default function SplitHeroBanner({ setActiveTab }) {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16">
         
-        {/* Main Split Grid */}
+        {/* Split Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           
-          {/* Left Column: Bold Capgemini-Style Editorial Typography */}
+          {/* Left Column */}
           <div className="lg:col-span-6 space-y-6 text-left">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-capBlue-50 dark:bg-capBlue-950 border border-capBlue-200 dark:border-capBlue-800 text-capBlue-600 dark:text-capBlue-400 text-xs font-extrabold tracking-wide uppercase">
-              <Sparkles className="w-3.5 h-3.5 text-amber-500" />
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-rose-50 dark:bg-rose-950 border border-rose-200 dark:border-rose-800 text-rose-600 dark:text-rose-400 text-xs font-black tracking-wide uppercase">
+              <AlertTriangle className="w-3.5 h-3.5" />
               <span>{currentSlide.tag}</span>
             </div>
 
@@ -69,16 +68,16 @@ export default function SplitHeroBanner({ setActiveTab }) {
               </div>
               <div>
                 <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider block">TPC Threshold</span>
-                <span className="text-base sm:text-lg font-black text-amber-600 dark:text-amber-400">25.0% Max</span>
+                <span className="text-base sm:text-lg font-black text-rose-600 dark:text-rose-400">25.0% Max</span>
               </div>
               <div>
-                <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider block">Auditability</span>
+                <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider block">Accountability</span>
                 <span className="text-base sm:text-lg font-black text-emerald-600 dark:text-emerald-400">100% XAI</span>
               </div>
             </div>
           </div>
 
-          {/* Right Column: Authentic Food Scientist in Lab Coat with Smart HUD */}
+          {/* Right Column: Real Food Preparation & AI Scan HUD */}
           <div className="lg:col-span-6 relative">
             <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-slate-200 dark:border-slate-800 bg-slate-900 group">
               <div className="aspect-[4/3] w-full overflow-hidden relative">
@@ -90,20 +89,20 @@ export default function SplitHeroBanner({ setActiveTab }) {
                 />
 
                 {/* Laser scanline overlay */}
-                <div className="absolute inset-x-0 h-1 bg-gradient-to-r from-transparent via-cyan-400 to-transparent opacity-80 laser-scan pointer-events-none"></div>
+                <div className="absolute inset-x-0 h-1 bg-gradient-to-r from-transparent via-rose-500 to-transparent opacity-80 laser-scan pointer-events-none"></div>
 
-                {/* Subtle gradient vignette */}
+                {/* Gradient vignette */}
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-transparent to-transparent pointer-events-none"></div>
               </div>
 
-              {/* Lab Diagnostic HUD overlay */}
-              <div className="absolute bottom-4 left-4 right-4 bg-white/90 dark:bg-slate-950/90 backdrop-blur-md p-4 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-xl space-y-2">
+              {/* Food Diagnostic HUD overlay */}
+              <div className="absolute bottom-4 left-4 right-4 bg-white/95 dark:bg-slate-950/95 backdrop-blur-md p-4 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-xl space-y-2">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <Activity className="w-4 h-4 text-capBlue-600 dark:text-capBlue-400 animate-pulse" />
+                    <Activity className="w-4 h-4 text-rose-600 dark:text-rose-400 animate-pulse" />
                     <span className="text-xs font-bold text-slate-900 dark:text-white">{currentSlide.hudTitle}</span>
                   </div>
-                  <span className="text-[10px] font-mono font-bold px-2.5 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800">
+                  <span className="text-[10px] font-mono font-bold px-2.5 py-0.5 rounded-full bg-rose-50 dark:bg-rose-950/60 text-rose-600 dark:text-rose-400 border border-rose-200 dark:border-rose-800">
                     {currentSlide.hudBadge}
                   </span>
                 </div>
@@ -111,7 +110,7 @@ export default function SplitHeroBanner({ setActiveTab }) {
                 <div className="grid grid-cols-2 gap-2 pt-1 border-t border-slate-100 dark:border-slate-800 text-xs">
                   <div>
                     <span className="text-slate-400 text-[10px] block">{currentSlide.metric1Label}</span>
-                    <span className="font-mono font-black text-slate-900 dark:text-amber-400 text-sm">{currentSlide.metric1}</span>
+                    <span className="font-mono font-black text-rose-600 dark:text-rose-400 text-sm">{currentSlide.metric1}</span>
                   </div>
                   <div>
                     <span className="text-slate-400 text-[10px] block">{currentSlide.metric2Label}</span>
@@ -124,7 +123,7 @@ export default function SplitHeroBanner({ setActiveTab }) {
 
         </div>
 
-        {/* Floating Minimalist Pill Carousel with Progress Bars */}
+        {/* Carousel Indicators */}
         <div className="flex items-center justify-center gap-3 mt-10">
           <button
             onClick={() => setCurrentIndex((prev) => (prev === 0 ? heroSlides.length - 1 : prev - 1))}

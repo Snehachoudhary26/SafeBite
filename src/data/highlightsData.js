@@ -1,32 +1,32 @@
 export const highlightsList = [
   {
     id: 1,
-    category: "DATA SCIENCE & TOXICOLOGY",
-    title: "Neural Detection of Carcinogenic Reused Frying Oils",
-    description: "How repeated thermal oxidation creates aldehydes and Total Polar Compounds, and how our Vision Transformer predicts toxicity without expensive laboratory hardware.",
-    image: "https://images.pexels.com/photos/2280571/pexels-photo-2280571.jpeg?auto=compress&cs=tinysrgb&w=800",
-    actionText: "Inspect Toxin Neural Net",
+    category: "FAST FOOD OIL CRISIS",
+    title: "Why Reheated Oil in Street Samosas & Rolls Causes Cancer",
+    description: "Repeatedly boiling frying oil creates toxic Total Polar Compounds (TPC) and aldehydes that destroy cellular DNA. Our AI flags degraded oil instantly from color and viscosity.",
+    image: "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=800&auto=format&fit=crop&q=80",
+    actionText: "Inspect Oil Degradation Model",
     tabLink: "vision",
-    badge: "ViT Model"
+    badge: "TPC > 25% Alert"
   },
   {
     id: 2,
-    category: "AUTONOMOUS MULTI-AGENT AI",
-    title: "4-Tier Agent Network for Statutory Accountability",
-    description: "Evidence Auditor, Toxicologist, Legal Compliance Agent, and XAI Arbiter collaborate to generate legally defensible inspection notices under the FSS Act, 2006.",
-    image: "https://images.pexels.com/photos/3825529/pexels-photo-3825529.jpeg?auto=compress&cs=tinysrgb&w=800",
-    actionText: "Watch Agent Deliberation",
-    tabLink: "agents",
-    badge: "LangGraph Architecture"
+    category: "TOXIC STREET DYES",
+    title: "The Danger of Rhodamine-B in Red Street Food Gravies",
+    description: "Industrial textile dye used to make cheap fast food look bright red causes acute liver damage and gastrointestinal tumors. Detect it before you eat.",
+    image: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=800&auto=format&fit=crop&q=80",
+    actionText: "Scan Street Food Dyes",
+    tabLink: "vision",
+    badge: "Banned Dye Radar"
   },
   {
     id: 3,
-    category: "EXPLAINABLE AI (XAI)",
-    title: "Zero Black-Box: TreeSHAP Feature Attributions",
-    description: "Every risk score is mathematically decomposed into individual feature weights—providing complete transparency to vendors, inspectors, and judicial authorities.",
-    image: "https://images.pexels.com/photos/3735780/pexels-photo-3735780.jpeg?auto=compress&cs=tinysrgb&w=800",
-    actionText: "Explore SHAP Breakdown",
-    tabLink: "xai",
-    badge: "Auditable AI"
+    category: "CITIZEN ACTION & LAW",
+    title: "Holding Fast Food Vendors Accountable with 1-Click FSSAI Notices",
+    description: "Empowering citizens with automated, evidence-backed legal grievance notices mapped to Sections 38 and 59 of the Food Safety & Standards Act, 2006.",
+    image: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800&auto=format&fit=crop&q=80",
+    actionText: "File Statutory Grievance",
+    tabLink: "directory",
+    badge: "FSS Act 2006"
   }
 ];

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { ThemeProvider } from './components/ThemeContext';
 import Navbar from './components/Navbar';
 import SplitHeroBanner from './components/SplitHeroBanner';
+import InteractiveFoodScanner from './components/InteractiveFoodScanner';
 import HighlightsGrid from './components/HighlightsGrid';
 import AgentConsole from './components/AgentConsole';
 import StreamingPipeline from './components/StreamingPipeline';
@@ -54,9 +55,13 @@ export default function App() {
           onLogout={handleLogout}
         />
 
+        {/* Real Food AI Hero Banner */}
         <SplitHeroBanner
           setActiveTab={setActiveTab}
         />
+
+        {/* Interactive Street Food AI Scanner (Samosas, Momos, Reused Oil) */}
+        <InteractiveFoodScanner />
 
         <main className="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16 w-full">
           {activeTab === 'agents' && (
