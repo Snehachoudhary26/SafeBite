@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { ShieldCheck, Cpu, Activity, Eye, Brain, FlaskConical, Store, Menu, X, AlertTriangle } from 'lucide-react';
+import { ShieldCheck, Cpu, Activity, Eye, Brain, FlaskConical, Store, Menu, X, AlertTriangle, UserCircle, LogOut } from 'lucide-react';
 
-export default function Navbar({ activeTab, setActiveTab, onOpenGrievance }) {
+export default function Navbar({ activeTab, setActiveTab, onOpenGrievance, user, onOpenAuth, onLogout }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navItems = [
@@ -65,11 +65,32 @@ export default function Navbar({ activeTab, setActiveTab, onOpenGrievance }) {
             })}
           </div>
 
-          {/* Action & Mobile Toggle */}
+          {/* Action & User Login/Profile */}
           <div className="flex items-center gap-2 sm:gap-3">
+            {user ? (
+              <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slateDark-900 border border-slate-800 text-xs">
+                <UserCircle className="w-4 h-4 text-emerald-400" />
+                <span className="text-white font-bold hidden sm:inline">{user.name}</span>
+                <button
+                  onClick={onLogout}
+                  title="Sign Out"
+                  className="text-slate-400 hover:text-rose-400 ml-1"
+                >
+                  <LogOut className="w-3.5 h-3.5" />
+                </button>
+              </div>
+            ) : (
+              <button
+                onClick={onOpenAuth}
+                className="px-3 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-700 text-xs font-semibold transition-all"
+              >
+                Sign In
+              </button>
+            )}
+
             <button
               onClick={onOpenGrievance}
-              className="px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-xl bg-gradient-to-r from-amberGold-600 to-rose-600 hover:from-amberGold-500 hover:to-rose-500 text-white text-xs font-bold flex items-center gap-1.5 shadow-lg shadow-amberGold-600/20 transition-all active:scale-95"
+              className="px-3.5 py-2 sm:px-4 sm:py-2 rounded-xl bg-gradient-to-r from-amberGold-600 to-rose-600 hover:from-amberGold-500 hover:to-rose-500 text-white text-xs font-bold flex items-center gap-1.5 shadow-lg shadow-amberGold-600/20 transition-all active:scale-95"
             >
               <AlertTriangle className="w-4 h-4 animate-bounce" />
               <span>Report Toxin</span>

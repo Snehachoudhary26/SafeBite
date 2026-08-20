@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import SplitHeroBanner from './components/SplitHeroBanner';
 import HighlightsGrid from './components/HighlightsGrid';
@@ -9,16 +9,36 @@ import XAIInspector from './components/XAIInspector';
 import DartLab from './components/DartLab';
 import VendorDirectory from './components/VendorDirectory';
 import GrievanceModal from './components/GrievanceModal';
+import AuthModal from './components/AuthModal';
 import Footer from './components/Footer';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState('agents');
   const [isGrievanceOpen, setIsGrievanceOpen] = useState(false);
+  const [isAuthOpen, setIsAuthOpen] = useState(false);
   const [selectedCaseForNotice, setSelectedCaseForNotice] = useState(null);
+  const [currentUser, setCurrentUser] = useState(null);
+
+  useEffect(() => {
+    const savedUser = localStorage.getItem('safebite_user');
+    if (savedUser) {
+      try {
+        setCurrentUser(JSON.parse(savedUser));
+      } catch (e) {
+        console.error(e);
+      }
+    }
+  }, []);
 
   const handleOpenGrievance = (caseData = null) => {
     setSelectedCaseForNotice(caseData);
     setIsGrievanceOpen(true);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('safebite_user');
+    localStorage.removeItem('safebite_token');
+    setCurrentUser(null);
   };
 
   return (
@@ -28,6 +48,9 @@ export default function App() {
         activeTab={activeTab}
         setActiveTab={setActiveTab}
         onOpenGrievance={() => handleOpenGrievance(null)}
+        user={currentUser}
+        onOpenAuth={() => setIsAuthOpen(true)}
+        onLogout={handleLogout}
       />
 
       {/* Animated Split-Hero Banner with DSLR Photography */}
@@ -63,7 +86,7 @@ export default function App() {
         )}
       </main>
 
-      {/* Capgemini-Inspired Editorial Highlights Grid */}
+      {/* Capgemini-Inspired Highlights Grid */}
       <HighlightsGrid setActiveTab={setActiveTab} />
 
       {/* Enterprise Footer */}
@@ -74,6 +97,13 @@ export default function App() {
         isOpen={isGrievanceOpen}
         onClose={() => setIsGrievanceOpen(false)}
         prefilledCase={selectedCaseForNotice}
+      />
+
+      {/* 100% Free Student Auth Modal (Login / Signup) */}
+      <AuthModal
+        isOpen={isAuthOpen}
+        onClose={() => setIsAuthOpen(false)}
+        onAuthSuccess={(user) => setCurrentUser(user)}
       />
     </div>
   );
