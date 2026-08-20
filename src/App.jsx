@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ThemeProvider } from './components/ThemeContext';
 import Navbar from './components/Navbar';
-import HeroExact from './components/HeroExact';
+import HeroMasterpiece from './components/HeroMasterpiece';
 import StatsBanner from './components/StatsBanner';
 import SolutionsSection from './components/SolutionsSection';
 import AgentConsole from './components/AgentConsole';
@@ -18,30 +18,50 @@ export default function App() {
   const [activeTab, setActiveTab] = useState('home');
   const [isGrievanceOpen, setIsGrievanceOpen] = useState(false);
   const [isAuthOpen, setIsAuthOpen] = useState(false);
+  const [currentUser, setCurrentUser] = useState(null);
+
+  useEffect(() => {
+    const savedUser = localStorage.getItem('safebite_user');
+    if (savedUser) {
+      try {
+        setCurrentUser(JSON.parse(savedUser));
+      } catch (e) {
+        console.error(e);
+      }
+    }
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem('safebite_user');
+    localStorage.removeItem('safebite_token');
+    setCurrentUser(null);
+  };
 
   return (
     <ThemeProvider>
-      <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-darkBg-950 text-slate-900 dark:text-slate-100 transition-colors">
+      <div className="min-h-screen flex flex-col master-light-bg dark:master-dark-bg text-slate-900 dark:text-white transition-colors duration-200">
         
-        {/* Navbar Matching Reference */}
+        {/* Exact Masterpiece Header matching Image 1 */}
         <Navbar
           activeTab={activeTab}
           setActiveTab={setActiveTab}
           onOpenGrievance={() => setIsGrievanceOpen(true)}
           onOpenAuth={() => setIsAuthOpen(true)}
+          user={currentUser}
+          onLogout={handleLogout}
         />
 
-        {/* Home Page Content */}
+        {/* Masterpiece Home Hero & Floating Stats matching Image 1 */}
         {activeTab === 'home' && (
           <>
-            <HeroExact setActiveTab={setActiveTab} />
+            <HeroMasterpiece setActiveTab={setActiveTab} />
             <StatsBanner />
             <SolutionsSection setActiveTab={setActiveTab} />
           </>
         )}
 
         {/* Interactive Sub-Modules */}
-        <main className="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
+        <main className="flex-1 max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full">
           {activeTab === 'vision' && (
             <VisionToxinStudio />
           )}
@@ -67,20 +87,17 @@ export default function App() {
           )}
         </main>
 
-        {/* Footer */}
         <Footer setActiveTab={setActiveTab} />
 
-        {/* Grievance Modal */}
         <GrievanceModal
           isOpen={isGrievanceOpen}
           onClose={() => setIsGrievanceOpen(false)}
         />
 
-        {/* Auth Modal */}
         <AuthModal
           isOpen={isAuthOpen}
           onClose={() => setIsAuthOpen(false)}
-          onAuthSuccess={() => setIsAuthOpen(false)}
+          onAuthSuccess={(user) => setCurrentUser(user)}
         />
 
       </div>

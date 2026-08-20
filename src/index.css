@@ -8,17 +8,44 @@
   }
 }
 
-/* Thermal Heatmap Gradient */
-.thermal-grad {
-  background: radial-gradient(circle at 35% 40%, rgba(239, 68, 68, 0.95), transparent 45%),
-              radial-gradient(circle at 65% 55%, rgba(245, 158, 11, 0.9), transparent 50%),
-              radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.8), transparent 70%),
-              #030712;
+/* Master Dark Background matching Image 1 */
+.master-dark-bg {
+  background-color: #060d1d;
+  background-image: 
+    radial-gradient(at 10% 20%, rgba(14, 116, 144, 0.15) 0px, transparent 50%),
+    radial-gradient(at 90% 10%, rgba(29, 78, 216, 0.18) 0px, transparent 50%),
+    radial-gradient(at 50% 80%, rgba(15, 23, 42, 0.6) 0px, transparent 50%);
 }
 
-/* Phone Frame Glass */
-.phone-glass {
-  background: rgba(15, 23, 42, 0.88);
+/* Master Light Background */
+.master-light-bg {
+  background-color: #f8fafc;
+  background-image: 
+    radial-gradient(at 10% 10%, rgba(224, 242, 254, 0.8) 0px, transparent 50%),
+    radial-gradient(at 90% 20%, rgba(241, 245, 249, 0.9) 0px, transparent 50%);
+}
+
+/* Thermal Heatmap Gradient matching Image 1 */
+.thermal-grad-box {
+  background: 
+    radial-gradient(circle at 35% 40%, #ff2a2a 0%, transparent 40%),
+    radial-gradient(circle at 65% 55%, #ffcc00 0%, transparent 45%),
+    radial-gradient(circle at 50% 50%, #00d4ff 0%, transparent 65%),
+    #020617;
+  filter: contrast(1.2) brightness(1.1);
+}
+
+/* Translucent Glass HUD Panels matching Image 1 */
+.hud-card {
+  background: rgba(10, 20, 38, 0.85);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(56, 189, 248, 0.2);
+}
+
+.hud-card-light {
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(203, 213, 225, 0.9);
 }
