@@ -1,28 +1,46 @@
 import React, { useState, useEffect } from 'react';
 import { heroSlides } from '../data/heroSlidesData';
-import { ChevronLeft, ChevronRight, ArrowRight, ShieldCheck, Activity, Sparkles, Scan, Eye } from 'lucide-react';
+import { ChevronLeft, ChevronRight, ArrowRight, Activity, Sparkles, Eye, ShieldCheck } from 'lucide-react';
 
 export default function SplitHeroBanner({ setActiveTab, onOpenGrievance }) {
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
 
-  const currentSlide = heroSlides[currentSlideIndex];
+  const safeSlides = heroSlides && heroSlides.length > 0 ? heroSlides : [
+    {
+      id: 1,
+      tag: "Next-Gen Food Intelligence",
+      title: "AI-Powered Food Safety & Carcinogen Radar",
+      subtitle: "Protecting citizens from toxic reheated frying oil, illegal dyes, and adulterated food.",
+      ctaText: "Explore Multi-Agent Audit",
+      ctaTab: "agents",
+      secondaryText: "Inspect Toxin Lab",
+      secondaryTab: "vision",
+      heroImage: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=1000&auto=format&fit=crop&q=85",
+      hudTitle: "Oil Quality Spectrophotometry",
+      hudMetricLabel: "Total Polar Compounds (TPC)",
+      hudMetricValue: "18.4%",
+      hudStatus: "SAFE / COMPLIANT",
+      hudStatusColor: "text-emerald-400 bg-emerald-500/10 border-emerald-500/30"
+    }
+  ];
 
-  // Auto-advance carousel every 6 seconds unless user is hovering
+  const currentSlide = safeSlides[currentSlideIndex] || safeSlides[0];
+
   useEffect(() => {
     if (isPaused) return;
     const timer = setInterval(() => {
-      setCurrentSlideIndex((prev) => (prev + 1) % heroSlides.length);
+      setCurrentSlideIndex((prev) => (prev + 1) % safeSlides.length);
     }, 6000);
     return () => clearInterval(timer);
-  }, [isPaused]);
+  }, [isPaused, safeSlides.length]);
 
   const handlePrev = () => {
-    setCurrentSlideIndex((prev) => (prev === 0 ? heroSlides.length - 1 : prev - 1));
+    setCurrentSlideIndex((prev) => (prev === 0 ? safeSlides.length - 1 : prev - 1));
   };
 
   const handleNext = () => {
-    setCurrentSlideIndex((prev) => (prev + 1) % heroSlides.length);
+    setCurrentSlideIndex((prev) => (prev + 1) % safeSlides.length);
   };
 
   return (
@@ -32,10 +50,9 @@ export default function SplitHeroBanner({ setActiveTab, onOpenGrievance }) {
       onMouseLeave={() => setIsPaused(false)}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-14">
-        {/* Main Split Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
           
-          {/* Left Column: Bold Editorial Typography */}
+          {/* Left Column */}
           <div className="lg:col-span-6 space-y-6 text-left">
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-cobalt-600/15 border border-cobalt-500/30 text-cobalt-400 text-xs font-bold">
               <Sparkles className="w-3.5 h-3.5 text-amberGold-400 animate-pulse" />
@@ -68,7 +85,7 @@ export default function SplitHeroBanner({ setActiveTab, onOpenGrievance }) {
               </button>
             </div>
 
-            {/* Floating Live Metrics Row */}
+            {/* Metrics Row */}
             <div className="pt-4 grid grid-cols-3 gap-3 border-t border-slate-800/80">
               <div>
                 <span className="text-[11px] text-slate-400 block">Spark Processing</span>
@@ -85,29 +102,27 @@ export default function SplitHeroBanner({ setActiveTab, onOpenGrievance }) {
             </div>
           </div>
 
-          {/* Right Column: Animated Cinematic DSLR Frame with HUD Overlays */}
+          {/* Right Column: DSLR Photographic Frame */}
           <div className="lg:col-span-6 relative">
             <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-slate-700 bg-slateDark-900 group">
-              {/* High-Resolution DSLR Photograph */}
               <div className="aspect-[4/3] w-full overflow-hidden relative">
                 <img
                   src={currentSlide.heroImage}
                   alt={currentSlide.title}
                   className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                  onError={(e) => {
+                    e.target.src = "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=1000&auto=format&fit=crop&q=85";
+                  }}
                 />
-
-                {/* Animated Green/Blue Laser Scanline Effect */}
                 <div className="absolute inset-x-0 h-1 bg-gradient-to-r from-transparent via-cobalt-400 to-transparent opacity-75 animate-scanline pointer-events-none"></div>
-
-                {/* Subtle vignette gradient */}
                 <div className="absolute inset-0 bg-gradient-to-t from-slateDark-950/90 via-transparent to-transparent pointer-events-none"></div>
               </div>
 
-              {/* Floating Lab Diagnostic HUD (Bottom-Left) */}
+              {/* Floating HUD */}
               <div className="absolute bottom-4 left-4 right-4 cap-panel p-4 rounded-xl border border-slate-700/80 shadow-lg space-y-2">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <Scan className="w-4 h-4 text-cobalt-400 animate-spin" />
+                    <Activity className="w-4 h-4 text-cobalt-400 animate-pulse" />
                     <span className="text-xs font-bold text-white">{currentSlide.hudTitle}</span>
                   </div>
                   <span className={`text-[10px] font-mono font-bold px-2 py-0.5 rounded-full border ${currentSlide.hudStatusColor}`}>
@@ -124,7 +139,7 @@ export default function SplitHeroBanner({ setActiveTab, onOpenGrievance }) {
           </div>
         </div>
 
-        {/* Floating Minimalist Pill Carousel Controls (Capgemini-Style) */}
+        {/* Carousel Indicators */}
         <div className="flex items-center justify-center gap-4 mt-8">
           <button
             onClick={handlePrev}
@@ -135,7 +150,7 @@ export default function SplitHeroBanner({ setActiveTab, onOpenGrievance }) {
           </button>
 
           <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-900 border border-slate-800">
-            {heroSlides.map((slide, idx) => (
+            {safeSlides.map((slide, idx) => (
               <button
                 key={slide.id}
                 onClick={() => setCurrentSlideIndex(idx)}
