@@ -1,56 +1,56 @@
 export const heroSlides = [
   {
     id: 1,
-    tag: "Next-Gen Food Intelligence",
-    title: "AI-Powered Food Safety & Carcinogen Radar",
-    subtitle: "Protecting citizens from toxic reheated frying oil, illegal Rhodamine-B dyes, and adulterated food using Computer Vision and Real-Time IoT Telemetry.",
-    ctaText: "Explore Multi-Agent Audit",
-    ctaTab: "agents",
-    secondaryText: "Inspect Toxin Lab",
-    secondaryTab: "vision",
-    badge: "RUCO & FSSAI Compliant",
-    // DSLR Photo of food scientist analyzing oil purity
-    heroImage: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=1000&auto=format&fit=crop&q=85",
-    hudTitle: "Spectrophotometric Oil Analysis",
-    hudMetricLabel: "Total Polar Compounds (TPC)",
-    hudMetricValue: "18.4%",
-    hudStatus: "SAFE / COMPLIANT",
-    hudStatusColor: "text-emerald-400 bg-emerald-500/10 border-emerald-500/30"
+    tag: "AI SPECTRAL LAB",
+    title: "Computer Vision & Total Polar Compound (TPC) Detection",
+    subtitle: "Empowering food safety officers and citizens to instantly detect carcinogenic reheated frying oil and illegal textile dyes using convolutional neural networks.",
+    ctaText: "Launch AI Vision Studio",
+    ctaTab: "vision",
+    secondaryText: "Read Scientific Whitepaper",
+    secondaryTab: "xai",
+    // Verified High-Res Image of Female Food Scientist in Lab Coat with Safety Glasses
+    heroImage: "https://images.pexels.com/photos/3735709/pexels-photo-3735709.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    hudTitle: "Spectrophotometric Assay #409",
+    hudBadge: "FSSAI RUCO Verified",
+    metric1: "18.4% TPC",
+    metric1Label: "Polar Compounds (Safe <25%)",
+    metric2: "98.7%",
+    metric2Label: "Model Accuracy (ViT)"
   },
   {
     id: 2,
-    tag: "Real-Time Big Data Engine",
-    title: "Continuous Kafka Stream & City Risk Heatmaps",
-    subtitle: "Ingesting 18,400+ telemetry events per second across commercial kitchens, fryer sensors, and wholesale mandi commodity price surges.",
-    ctaText: "View Live Kafka Stream",
+    tag: "REAL-TIME BIG DATA",
+    title: "Autonomous Kafka Stream & Spatial Adulteration Heatmaps",
+    subtitle: "Real-time stream processing of 18,400+ telemetry events/sec from commercial fryers, IoT oil sensors, and wholesale mandi commodity price shocks.",
+    ctaText: "Inspect Kafka Telemetry",
     ctaTab: "streaming",
-    secondaryText: "Explainable AI (XAI)",
-    secondaryTab: "xai",
-    badge: "Spark Stream: 42ms Latency",
-    // DSLR Photo of lab technologist inspecting samples
-    heroImage: "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=1000&auto=format&fit=crop&q=85",
-    hudTitle: "IoT Sensor Telemetry Node #44",
-    hudMetricLabel: "Oil Temperature & Viscosity",
-    hudMetricValue: "178°C | 3.2 cSt",
-    hudStatus: "REAL-TIME SYNC",
-    hudStatusColor: "text-cobalt-400 bg-cobalt-500/10 border-cobalt-500/30"
+    secondaryText: "Multi-Agent AI Network",
+    secondaryTab: "agents",
+    // Verified High-Res Image of Food Technologist Monitoring Diagnostic Displays
+    heroImage: "https://images.pexels.com/photos/3825586/pexels-photo-3825586.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    hudTitle: "Commercial IoT Telemetry Stream",
+    hudBadge: "Active Kafka Cluster",
+    metric1: "42 ms",
+    metric1Label: "Spark Processing Latency",
+    metric2: "3,892",
+    metric2Label: "Online Fryer Sensors"
   },
   {
     id: 3,
-    tag: "Citizen Empowerment Lab",
-    title: "Instant 2-Minute DIY Adulteration Testing",
-    subtitle: "Detect added starch in milk, invert sugar in honey, and toxic metanil yellow in turmeric at home with certified FSSAI DART protocols.",
-    ctaText: "Launch DART Testing Lab",
+    tag: "CITIZEN WATCHDOG HUB",
+    title: "Instant 2-Minute DIY Rapid Adulteration Testing",
+    subtitle: "Certified FSSAI DART protocols to identify synthetic milk, lead chromate in turmeric, and invert sugar in honey from the comfort of home.",
+    ctaText: "Open DART Testing Lab",
     ctaTab: "dart",
-    secondaryText: "Search Certified Stalls",
+    secondaryText: "Verified Vendor Directory",
     secondaryTab: "directory",
-    badge: "Citizen Watchdog Hub",
-    // DSLR Photo of scientific precision test
-    heroImage: "https://images.unsplash.com/photo-1579154204601-01588f351e67?w=1000&auto=format&fit=crop&q=85",
-    hudTitle: "Milk Starch Iodine Assay",
-    hudMetricLabel: "Visual Reaction Indicator",
-    hudMetricValue: "Negative (Pure)",
-    hudStatus: "NO ADULTERANT",
-    hudStatusColor: "text-amberGold-400 bg-amberGold-500/10 border-amberGold-500/30"
+    // Verified High-Res Image of Chemistry Lab Test Tubes & Reagents
+    heroImage: "https://images.pexels.com/photos/2280549/pexels-photo-2280549.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    hudTitle: "FSSAI DART Rapid Assay Protocol",
+    hudBadge: "Citizen Kit",
+    metric1: "120 Sec",
+    metric1Label: "Average Test Duration",
+    metric2: "50+ Tests",
+    metric2Label: "Covered Food Staples"
   }
 ];

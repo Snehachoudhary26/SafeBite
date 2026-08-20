@@ -4,49 +4,28 @@ export default {
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
+  darkMode: 'class',
   theme: {
     extend: {
       colors: {
-        cobalt: {
-          50: '#eff6ff',
-          100: '#dbeafe',
-          500: '#3b82f6',
-          600: '#2563eb',
-          700: '#1d4ed8',
-          800: '#1e40af',
-          900: '#1e3a8a',
-          950: '#0a192f',
+        capBlue: {
+          50: '#f0f7ff',
+          100: '#e0effe',
+          500: '#0070ba',
+          600: '#005a9c',
+          700: '#00457c',
+          800: '#00335e',
+          900: '#002240',
         },
-        amberGold: {
-          400: '#fbbf24',
-          500: '#f59e0b',
-          600: '#d97706',
-          700: '#b45309',
-        },
-        slateDark: {
-          800: '#1e293b',
-          900: '#0f172a',
-          950: '#030712',
+        safebiteGold: {
+          400: '#f59e0b',
+          500: '#d97706',
+          600: '#b45309',
         }
       },
-      animation: {
-        'scanline': 'scanline 3s linear infinite',
-        'float-slow': 'float 4s ease-in-out infinite',
-        'pulse-glow': 'pulseGlow 2.5s ease-in-out infinite',
-      },
-      keyframes: {
-        scanline: {
-          '0%': { transform: 'translateY(-100%)' },
-          '100%': { transform: 'translateY(1000%)' }
-        },
-        float: {
-          '0%, 100%': { transform: 'translateY(0px)' },
-          '50%': { transform: 'translateY(-6px)' }
-        },
-        pulseGlow: {
-          '0%, 100%': { opacity: '0.4' },
-          '50%': { opacity: '0.9' }
-        }
+      fontFamily: {
+        sans: ['Plus Jakarta Sans', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+        mono: ['JetBrains Mono', 'monospace'],
       }
     },
   },

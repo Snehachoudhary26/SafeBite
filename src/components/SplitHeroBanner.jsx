@@ -1,69 +1,45 @@
 import React, { useState, useEffect } from 'react';
 import { heroSlides } from '../data/heroSlidesData';
-import { ChevronLeft, ChevronRight, ArrowRight, Activity, Sparkles, Eye, ShieldCheck } from 'lucide-react';
+import { ChevronLeft, ChevronRight, ArrowRight, Activity, Sparkles, Shield, CheckCircle } from 'lucide-react';
 
-export default function SplitHeroBanner({ setActiveTab, onOpenGrievance }) {
-  const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
+export default function SplitHeroBanner({ setActiveTab }) {
+  const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
 
-  const safeSlides = heroSlides && heroSlides.length > 0 ? heroSlides : [
-    {
-      id: 1,
-      tag: "Next-Gen Food Intelligence",
-      title: "AI-Powered Food Safety & Carcinogen Radar",
-      subtitle: "Protecting citizens from toxic reheated frying oil, illegal dyes, and adulterated food.",
-      ctaText: "Explore Multi-Agent Audit",
-      ctaTab: "agents",
-      secondaryText: "Inspect Toxin Lab",
-      secondaryTab: "vision",
-      heroImage: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=1000&auto=format&fit=crop&q=85",
-      hudTitle: "Oil Quality Spectrophotometry",
-      hudMetricLabel: "Total Polar Compounds (TPC)",
-      hudMetricValue: "18.4%",
-      hudStatus: "SAFE / COMPLIANT",
-      hudStatusColor: "text-emerald-400 bg-emerald-500/10 border-emerald-500/30"
-    }
-  ];
+  const currentSlide = heroSlides[currentIndex];
 
-  const currentSlide = safeSlides[currentSlideIndex] || safeSlides[0];
-
+  // Auto-advance banner animation every 5.5 seconds smoothly
   useEffect(() => {
     if (isPaused) return;
-    const timer = setInterval(() => {
-      setCurrentSlideIndex((prev) => (prev + 1) % safeSlides.length);
-    }, 6000);
-    return () => clearInterval(timer);
-  }, [isPaused, safeSlides.length]);
-
-  const handlePrev = () => {
-    setCurrentSlideIndex((prev) => (prev === 0 ? safeSlides.length - 1 : prev - 1));
-  };
-
-  const handleNext = () => {
-    setCurrentSlideIndex((prev) => (prev + 1) % safeSlides.length);
-  };
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % heroSlides.length);
+    }, 5500);
+    return () => clearInterval(interval);
+  }, [isPaused]);
 
   return (
     <div
-      className="relative overflow-hidden border-b border-slate-800 bg-gradient-to-b from-slateDark-900 via-slateDark-950 to-slateDark-950"
+      className="relative overflow-hidden bg-gradient-to-b from-slate-50 via-white to-slate-100 dark:from-slate-900 dark:via-slate-950 dark:to-slate-950 border-b border-slate-200 dark:border-slate-800 transition-colors duration-200"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-14">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16">
+        
+        {/* Main Split Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           
-          {/* Left Column */}
+          {/* Left Column: Bold Capgemini-Style Editorial Typography */}
           <div className="lg:col-span-6 space-y-6 text-left">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-cobalt-600/15 border border-cobalt-500/30 text-cobalt-400 text-xs font-bold">
-              <Sparkles className="w-3.5 h-3.5 text-amberGold-400 animate-pulse" />
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-capBlue-50 dark:bg-capBlue-950 border border-capBlue-200 dark:border-capBlue-800 text-capBlue-600 dark:text-capBlue-400 text-xs font-extrabold tracking-wide uppercase">
+              <Sparkles className="w-3.5 h-3.5 text-amber-500" />
               <span>{currentSlide.tag}</span>
             </div>
 
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight leading-[1.15]">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 dark:text-white tracking-tight leading-[1.12]">
               {currentSlide.title}
             </h1>
 
-            <p className="text-sm sm:text-base text-slate-300 leading-relaxed max-w-xl">
+            <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed max-w-xl">
               {currentSlide.subtitle}
             </p>
 
@@ -71,7 +47,7 @@ export default function SplitHeroBanner({ setActiveTab, onOpenGrievance }) {
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-2">
               <button
                 onClick={() => setActiveTab(currentSlide.ctaTab)}
-                className="px-6 py-3.5 rounded-xl bg-cobalt-600 hover:bg-cobalt-500 text-white font-bold text-xs sm:text-sm shadow-xl shadow-cobalt-600/25 flex items-center justify-center gap-2 transition-all active:scale-95"
+                className="px-6 py-3.5 rounded-xl bg-capBlue-600 hover:bg-capBlue-500 text-white font-bold text-xs sm:text-sm shadow-xl shadow-capBlue-600/20 flex items-center justify-center gap-2 transition-all active:scale-95"
               >
                 <span>{currentSlide.ctaText}</span>
                 <ArrowRight className="w-4 h-4" />
@@ -79,92 +55,101 @@ export default function SplitHeroBanner({ setActiveTab, onOpenGrievance }) {
 
               <button
                 onClick={() => setActiveTab(currentSlide.secondaryTab)}
-                className="px-6 py-3.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-200 font-semibold text-xs sm:text-sm border border-slate-700 flex items-center justify-center gap-2 transition-all"
+                className="px-6 py-3.5 rounded-xl bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 font-bold text-xs sm:text-sm border border-slate-300 dark:border-slate-700 flex items-center justify-center gap-2 transition-all"
               >
                 <span>{currentSlide.secondaryText}</span>
               </button>
             </div>
 
-            {/* Metrics Row */}
-            <div className="pt-4 grid grid-cols-3 gap-3 border-t border-slate-800/80">
+            {/* Micro Stats */}
+            <div className="pt-4 grid grid-cols-2 sm:grid-cols-3 gap-4 border-t border-slate-200 dark:border-slate-800">
               <div>
-                <span className="text-[11px] text-slate-400 block">Spark Processing</span>
-                <span className="text-base sm:text-lg font-black text-white">18.4k msg/s</span>
+                <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider block">Throughput</span>
+                <span className="text-base sm:text-lg font-black text-slate-900 dark:text-white">18.4k msg/s</span>
               </div>
               <div>
-                <span className="text-[11px] text-slate-400 block">TPC Legal Limit</span>
-                <span className="text-base sm:text-lg font-black text-amberGold-400">25.0% Max</span>
+                <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider block">TPC Threshold</span>
+                <span className="text-base sm:text-lg font-black text-amber-600 dark:text-amber-400">25.0% Max</span>
               </div>
               <div>
-                <span className="text-[11px] text-slate-400 block">Model Provenance</span>
-                <span className="text-base sm:text-lg font-black text-emerald-400">100% XAI</span>
+                <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider block">Auditability</span>
+                <span className="text-base sm:text-lg font-black text-emerald-600 dark:text-emerald-400">100% XAI</span>
               </div>
             </div>
           </div>
 
-          {/* Right Column: DSLR Photographic Frame */}
+          {/* Right Column: Authentic Food Scientist in Lab Coat with Smart HUD */}
           <div className="lg:col-span-6 relative">
-            <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-slate-700 bg-slateDark-900 group">
+            <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-slate-200 dark:border-slate-800 bg-slate-900 group">
               <div className="aspect-[4/3] w-full overflow-hidden relative">
                 <img
+                  key={currentSlide.id}
                   src={currentSlide.heroImage}
                   alt={currentSlide.title}
                   className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                  onError={(e) => {
-                    e.target.src = "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=1000&auto=format&fit=crop&q=85";
-                  }}
                 />
-                <div className="absolute inset-x-0 h-1 bg-gradient-to-r from-transparent via-cobalt-400 to-transparent opacity-75 animate-scanline pointer-events-none"></div>
-                <div className="absolute inset-0 bg-gradient-to-t from-slateDark-950/90 via-transparent to-transparent pointer-events-none"></div>
+
+                {/* Laser scanline overlay */}
+                <div className="absolute inset-x-0 h-1 bg-gradient-to-r from-transparent via-cyan-400 to-transparent opacity-80 laser-scan pointer-events-none"></div>
+
+                {/* Subtle gradient vignette */}
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-transparent to-transparent pointer-events-none"></div>
               </div>
 
-              {/* Floating HUD */}
-              <div className="absolute bottom-4 left-4 right-4 cap-panel p-4 rounded-xl border border-slate-700/80 shadow-lg space-y-2">
+              {/* Lab Diagnostic HUD overlay */}
+              <div className="absolute bottom-4 left-4 right-4 bg-white/90 dark:bg-slate-950/90 backdrop-blur-md p-4 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-xl space-y-2">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <Activity className="w-4 h-4 text-cobalt-400 animate-pulse" />
-                    <span className="text-xs font-bold text-white">{currentSlide.hudTitle}</span>
+                    <Activity className="w-4 h-4 text-capBlue-600 dark:text-capBlue-400 animate-pulse" />
+                    <span className="text-xs font-bold text-slate-900 dark:text-white">{currentSlide.hudTitle}</span>
                   </div>
-                  <span className={`text-[10px] font-mono font-bold px-2 py-0.5 rounded-full border ${currentSlide.hudStatusColor}`}>
-                    {currentSlide.hudStatus}
+                  <span className="text-[10px] font-mono font-bold px-2.5 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800">
+                    {currentSlide.hudBadge}
                   </span>
                 </div>
 
-                <div className="flex items-center justify-between text-xs pt-1">
-                  <span className="text-slate-400 text-[11px]">{currentSlide.hudMetricLabel}:</span>
-                  <span className="font-mono font-black text-amberGold-400 text-sm">{currentSlide.hudMetricValue}</span>
+                <div className="grid grid-cols-2 gap-2 pt-1 border-t border-slate-100 dark:border-slate-800 text-xs">
+                  <div>
+                    <span className="text-slate-400 text-[10px] block">{currentSlide.metric1Label}</span>
+                    <span className="font-mono font-black text-slate-900 dark:text-amber-400 text-sm">{currentSlide.metric1}</span>
+                  </div>
+                  <div>
+                    <span className="text-slate-400 text-[10px] block">{currentSlide.metric2Label}</span>
+                    <span className="font-mono font-black text-slate-900 dark:text-cyan-400 text-sm">{currentSlide.metric2}</span>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
+
         </div>
 
-        {/* Carousel Indicators */}
-        <div className="flex items-center justify-center gap-4 mt-8">
+        {/* Floating Minimalist Pill Carousel with Progress Bars */}
+        <div className="flex items-center justify-center gap-3 mt-10">
           <button
-            onClick={handlePrev}
-            className="p-2 rounded-full bg-slate-900 border border-slate-700 text-slate-300 hover:text-white hover:bg-slate-800 transition-all"
+            onClick={() => setCurrentIndex((prev) => (prev === 0 ? heroSlides.length - 1 : prev - 1))}
+            className="p-2 rounded-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all shadow-sm"
             aria-label="Previous Slide"
           >
             <ChevronLeft className="w-4 h-4" />
           </button>
 
-          <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-900 border border-slate-800">
-            {safeSlides.map((slide, idx) => (
+          <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm">
+            {heroSlides.map((slide, idx) => (
               <button
                 key={slide.id}
-                onClick={() => setCurrentSlideIndex(idx)}
+                onClick={() => setCurrentIndex(idx)}
                 className={`h-2 rounded-full transition-all duration-300 ${
-                  currentSlideIndex === idx ? 'w-6 bg-cobalt-500' : 'w-2 bg-slate-700 hover:bg-slate-600'
+                  currentIndex === idx ? 'w-8 bg-capBlue-600' : 'w-2.5 bg-slate-300 dark:bg-slate-700 hover:bg-slate-400'
                 }`}
-                aria-label={`Go to slide ${idx + 1}`}
+                aria-label={`Slide ${idx + 1}`}
               />
             ))}
           </div>
 
           <button
-            onClick={handleNext}
-            className="p-2 rounded-full bg-slate-900 border border-slate-700 text-slate-300 hover:text-white hover:bg-slate-800 transition-all"
+            onClick={() => setCurrentIndex((prev) => (prev + 1) % heroSlides.length)}
+            className="p-2 rounded-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all shadow-sm"
             aria-label="Next Slide"
           >
             <ChevronRight className="w-4 h-4" />
