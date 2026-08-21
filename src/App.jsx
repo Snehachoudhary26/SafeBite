@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import { ThemeProvider } from './components/ThemeContext';
+import React, { useState } from 'react';
 import Navbar from './components/Navbar';
 import HeroReferenceMaster from './components/HeroReferenceMaster';
 import StatsBanner from './components/StatsBanner';
@@ -18,89 +17,49 @@ export default function App() {
   const [activeTab, setActiveTab] = useState('home');
   const [isGrievanceOpen, setIsGrievanceOpen] = useState(false);
   const [isAuthOpen, setIsAuthOpen] = useState(false);
-  const [currentUser, setCurrentUser] = useState(null);
-
-  useEffect(() => {
-    const savedUser = localStorage.getItem('safebite_user');
-    if (savedUser) {
-      try {
-        setCurrentUser(JSON.parse(savedUser));
-      } catch (e) {
-        console.error(e);
-      }
-    }
-  }, []);
-
-  const handleLogout = () => {
-    localStorage.removeItem('safebite_user');
-    localStorage.removeItem('safebite_token');
-    setCurrentUser(null);
-  };
 
   return (
-    <ThemeProvider>
-      <div className="min-h-screen flex flex-col bg-reference-light dark:bg-reference-dark text-slate-900 dark:text-white transition-colors duration-200">
-        
-        {/* Navbar matching Image 1 */}
-        <Navbar
-          activeTab={activeTab}
-          setActiveTab={setActiveTab}
-          onOpenGrievance={() => setIsGrievanceOpen(true)}
-          onOpenAuth={() => setIsAuthOpen(true)}
-          user={currentUser}
-          onLogout={handleLogout}
-        />
+    <div className="min-h-screen flex flex-col bg-[#070e1c] text-white">
+      
+      {/* Top Navbar */}
+      <Navbar
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
+        onOpenGrievance={() => setIsGrievanceOpen(true)}
+        onOpenAuth={() => setIsAuthOpen(true)}
+      />
 
-        {/* Masterpiece Home Page matching Image 1 */}
-        {activeTab === 'home' && (
-          <>
-            <HeroReferenceMaster setActiveTab={setActiveTab} />
-            <StatsBanner />
-            <SolutionsSection setActiveTab={setActiveTab} />
-          </>
-        )}
+      {/* Main Reference Page */}
+      {activeTab === 'home' && (
+        <>
+          <HeroReferenceMaster setActiveTab={setActiveTab} />
+          <StatsBanner />
+          <SolutionsSection setActiveTab={setActiveTab} />
+        </>
+      )}
 
-        {/* Interactive Sub-Modules */}
-        <main className="flex-1 max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full">
-          {activeTab === 'vision' && (
-            <VisionToxinStudio />
-          )}
+      {/* Sub-Workspaces */}
+      <main className="flex-1 max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full">
+        {activeTab === 'vision' && <VisionToxinStudio />}
+        {activeTab === 'streaming' && <StreamingPipeline />}
+        {activeTab === 'agents' && <AgentConsole onGenerateNotice={() => setIsGrievanceOpen(true)} />}
+        {activeTab === 'xai' && <XAIInspector />}
+        {activeTab === 'dart' && <DartLab />}
+        {activeTab === 'directory' && <VendorDirectory onOpenGrievance={() => setIsGrievanceOpen(true)} />}
+      </main>
 
-          {activeTab === 'streaming' && (
-            <StreamingPipeline />
-          )}
+      <Footer setActiveTab={setActiveTab} />
 
-          {activeTab === 'agents' && (
-            <AgentConsole onGenerateNotice={() => setIsGrievanceOpen(true)} />
-          )}
+      <GrievanceModal
+        isOpen={isGrievanceOpen}
+        onClose={() => setIsGrievanceOpen(false)}
+      />
 
-          {activeTab === 'xai' && (
-            <XAIInspector />
-          )}
+      <AuthModal
+        isOpen={isAuthOpen}
+        onClose={() => setIsAuthOpen(false)}
+      />
 
-          {activeTab === 'dart' && (
-            <DartLab />
-          )}
-
-          {activeTab === 'directory' && (
-            <VendorDirectory onOpenGrievance={() => setIsGrievanceOpen(true)} />
-          )}
-        </main>
-
-        <Footer setActiveTab={setActiveTab} />
-
-        <GrievanceModal
-          isOpen={isGrievanceOpen}
-          onClose={() => setIsGrievanceOpen(false)}
-        />
-
-        <AuthModal
-          isOpen={isAuthOpen}
-          onClose={() => setIsAuthOpen(false)}
-          onAuthSuccess={(user) => setCurrentUser(user)}
-        />
-
-      </div>
-    </ThemeProvider>
+    </div>
   );
 }
